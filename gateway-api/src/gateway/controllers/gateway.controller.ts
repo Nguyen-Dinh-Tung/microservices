@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { GatewayService } from '../services/gateway,service';
+import { GatewayService } from '../services/gateway.service';
 import { CreateGateWay } from '../dto/gate-handle.dto';
 
 @Controller('gate')
@@ -11,6 +11,6 @@ export class GatewayController {
   }
   @Post('handle')
   async connect(@Body() data: CreateGateWay) {
-    console.log(data, 'data');
+    return await this.gatewayService.connect(data);
   }
 }
