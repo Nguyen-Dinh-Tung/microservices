@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsEnum } from 'class-validator';
+import { CLIENT_METHOD_MICROSERVICE } from 'src/core/enums/client-method.microservice.enum';
 import { SERVICES_ENUM } from 'src/core/enums/services.enum';
 
 export class CreateGateWay {
@@ -7,4 +8,8 @@ export class CreateGateWay {
   service: SERVICES_ENUM;
   @IsNotEmpty()
   body: any;
+  @IsNotEmpty()
+  cmd: string;
+  @IsNotEmpty()
+  method: CLIENT_METHOD_MICROSERVICE;
 }
