@@ -30,19 +30,22 @@ import { AcountsEntity } from '../entities/acounts.entity';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { DeleteParamDto } from '../../core/dto/delete-param.dto';
 import { UpdateAcountDto } from '../dto/update-acount.dto';
+import { Public } from 'src/core/decorator/public.decorator';
+import { MessagePattern } from '@nestjs/microservices';
 @ApiTags('acounts')
 @ApiBearerAuth()
 @Controller('acounts')
 export class AcountsController {
   constructor(private readonly acountsService: AcountsService) {}
   @ApiOperation({ summary: 'Get list acounts' })
-  @Get()
-  async findAll(@Res() res: Response, @Query() queryDto: QueryDtoBase) {
+  @Public()
+  @MessagePattern({ cmd: 'find-all-acounts' })
+  async findAll(data: any) {
     try {
-      return await this.acountsService.findALl(res, queryDto);
+      return await this.acountsService.findALl(data?.res, data?.queryDto);
     } catch (e) {
       if (e) {
-        AppRes(e.message, HttpStatus.INTERNAL_SERVER_ERROR, res);
+        AppRes(e.message, HttpStatus.INTERNAL_SERVER_ERROR, data?.res);
       }
     }
   }

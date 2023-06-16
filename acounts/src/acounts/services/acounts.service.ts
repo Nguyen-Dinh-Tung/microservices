@@ -42,7 +42,7 @@ export class AcountsService {
     this.acountRepo = this.dataSource.getRepository(AcountsEntity);
   }
 
-  async findALl(res: Response, queryDto: QueryDtoBase) {
+  async findALl(res: Response, queryDto?: QueryDtoBase) {
     // const cache = await this.cacheManager.get(process.env.CACHE_USERS_KEY);
     // if (!cache) {
     // await this.cacheManager.del(process.env.CACHE);

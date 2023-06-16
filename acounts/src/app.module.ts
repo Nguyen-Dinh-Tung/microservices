@@ -34,7 +34,7 @@ import { SubcriberModule } from './core/modules/subcriber/subcriber.module';
     AuthModule,
     MorganModule,
     WinstonModule.register('admin'),
-    TelegramBotModule,
+    // TelegramBotModule,
     SubcriberModule,
   ],
   controllers: [AppController],

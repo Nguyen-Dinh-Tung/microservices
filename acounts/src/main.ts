@@ -9,6 +9,8 @@ import { TelegramBotModule } from './core/modules/telegram-bot/telegram-bot.modu
 import { TelegramBotCommandModule } from './core/modules/telegram-bot-command/telegram-bot-command.module';
 import { FilterErrorException } from './core/filter-exception/fillter-exception.error';
 import { TelegramBotService } from './core/modules/telegram-bot/serivces/services/telegram-bot.service';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   initializeTransactionalContext();
@@ -24,12 +26,18 @@ async function bootstrap() {
     .setDescription('The landing page api')
     .setVersion('1.0')
     .build();
+  const configService = app.get(ConfigService);
   const document = SwaggerModule.createDocument(app, config);
   app.useGlobalFilters(new FilterErrorException(app.get(TelegramBotService)));
-  SwaggerModule.setup('open', app, document);
-  await app.listen(process.env.SERVER_PORT, () => {
-    console.log('Server port ' + process.env.SERVER_PORT);
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.TCP,
+    options: {
+      port: +configService.get<number>('SERVER_PORT'),
+      host: configService.get<string>('SERVER_HOST'),
+    },
   });
+  app.startAllMicroservices();
+  SwaggerModule.setup('open', app, document);
 }
 bootstrap();
 async function botBootstrap() {
