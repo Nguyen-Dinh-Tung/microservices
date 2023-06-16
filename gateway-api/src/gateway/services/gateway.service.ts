@@ -3,13 +3,14 @@ import { CreateGateWay } from '../dto/gate-handle.dto';
 import { ClientProxy } from '@nestjs/microservices';
 import { SERVICES_ENUM } from 'src/core/enums/services.enum';
 import { CLIENT_METHOD_MICROSERVICE } from 'src/core/enums/client-method.microservice.enum';
+import { Response } from 'express';
 @Injectable()
 export class GatewayService {
   constructor(
     @Inject('ACOUNT_CLIENT')
     private readonly acountClient: ClientProxy,
   ) {}
-  async connect(data: CreateGateWay) {
+  async connect(data: CreateGateWay, res: Response) {
     console.log(this.acountClient, 'acount');
 
     return data.method === CLIENT_METHOD_MICROSERVICE.EMIT
@@ -22,7 +23,10 @@ export class GatewayService {
         }
       : await this.getClient(data.service)[data.method](
           { cmd: data.cmd },
-          data,
+          {
+            ...data,
+            res: res,
+          },
         );
   }
   getClient(service: SERVICES_ENUM): ClientProxy {
