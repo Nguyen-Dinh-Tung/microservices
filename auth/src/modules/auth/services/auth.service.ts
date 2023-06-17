@@ -28,6 +28,6 @@ export class AuthService {
     return await this.acountClientProxy.send('FIND_ONE_BY_FIELD', data);
   }
   async createToken(data): Promise<string> {
-    return await this.jwtService.sign(data);
+    return this.jwtService.signAsync(data);
   }
 }

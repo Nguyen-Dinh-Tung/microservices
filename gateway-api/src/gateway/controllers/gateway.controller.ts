@@ -11,7 +11,7 @@ export class GatewayController {
     return 'helo';
   }
   @Post('handle')
-  async connect(@Body() data: CreateGateWay, @Res() res: Response) {
-    return await this.gatewayService.connect(data, res);
+  async connect(@Body() data: CreateGateWay) {
+    return await this.gatewayService.connect(data);
   }
 }
