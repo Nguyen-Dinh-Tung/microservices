@@ -5,8 +5,10 @@ import { SERVICES_ENUM } from 'src/core/enums/services.enum';
 @Injectable()
 export class GatewayService {
   constructor(
-    @Inject('ACOUNT_CLIENT')
+    @Inject('ACOUNT_CLIENT_MICROSERVICE')
     private readonly acountClient: ClientProxy,
+    @Inject('AUTH_CLIENT_MICROSERVICE')
+    private readonly authClient: ClientProxy,
   ) {}
   async connect(data: CreateGateWay) {
     return await this.getClient(data.service)[data.method](
@@ -16,8 +18,10 @@ export class GatewayService {
   }
   getClient(service: SERVICES_ENUM): ClientProxy {
     const acounts = this.acountClient;
+    const auth = this.authClient;
     const clients = {
       acounts: acounts,
+      auth: auth,
     };
     return clients[service];
   }

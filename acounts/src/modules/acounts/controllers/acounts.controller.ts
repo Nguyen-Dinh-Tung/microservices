@@ -8,6 +8,6 @@ export class AcountsController {
   constructor(private readonly acountsService: AcountsServices) {}
   @MessagePattern({ cmd: MESSAGE_PATTERN.ACOUNTS.FIND_ONE_BY_FIELD })
   async findOneByField(data) {
-    return await this.acountsService.findOneByField(data['body']);
+    return await this.acountsService.findOneByField(data);
   }
 }

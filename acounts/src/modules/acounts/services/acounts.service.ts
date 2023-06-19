@@ -10,8 +10,10 @@ export class AcountsServices {
     this.acountsRepo = this.dataSource.getRepository(AcountsEntity);
   }
   async findOneByField(data: FindOneByFieldDto) {
+    console.log(data, ' data');
+
     return await this.acountsRepo.findOne({
-      where: data,
+      where: { ...data },
     });
   }
 }

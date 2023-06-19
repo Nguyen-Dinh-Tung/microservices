@@ -9,13 +9,25 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
   providers: [
     GatewayService,
     {
-      provide: 'ACOUNT_CLIENT',
+      provide: 'ACOUNT_CLIENT_MICROSERVICE',
       useFactory: (configService: ConfigService) =>
         ClientProxyFactory.create({
           transport: Transport.TCP,
           options: {
             port: configService.get<number>('ACOUNT_CLIENT_PORT'),
             host: configService.get<string>('ACOUNT_CLIENT_HOST'),
+          },
+        }),
+      inject: [ConfigService],
+    },
+    {
+      provide: 'AUTH_CLIENT_MICROSERVICE',
+      useFactory: (configService: ConfigService) =>
+        ClientProxyFactory.create({
+          transport: Transport.TCP,
+          options: {
+            port: configService.get<number>('AUTH_CLIENT_PORT'),
+            host: configService.get<string>('AUTH_CLIENT_HOST'),
           },
         }),
       inject: [ConfigService],

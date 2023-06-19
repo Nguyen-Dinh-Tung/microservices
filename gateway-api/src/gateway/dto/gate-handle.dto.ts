@@ -7,8 +7,6 @@ export class CreateGateWay {
   @IsEnum(SERVICES_ENUM)
   service: SERVICES_ENUM;
   @IsNotEmpty()
-  body: any;
-  @IsNotEmpty()
   cmd: string;
   @IsNotEmpty()
   method: CLIENT_METHOD_MICROSERVICE;

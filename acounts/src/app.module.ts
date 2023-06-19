@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { MulterModule } from '@nestjs/platform-express/multer';
 import { DatabaseModule } from './core/databases/database.module';
 import { AcountsModule } from './modules/acounts/acounts.module';
+import { MorganModule } from './core/modules/morgan/morgan.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { AcountsModule } from './modules/acounts/acounts.module';
       isGlobal: true,
       expandVariables: true,
     }),
+    MorganModule,
     MulterModule.register({
       dest: '/data/images',
     }),

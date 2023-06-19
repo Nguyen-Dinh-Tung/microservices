@@ -14,6 +14,9 @@ async function bootstrap() {
       host: configService.get<string>('MAIN_HOST'),
     },
   });
-  app.startAllMicroservices();
+  await app.startAllMicroservices();
+  console.log(
+    `Acounts service port :${configService.get<number>('MAIN_PORT')}`,
+  );
 }
 bootstrap();

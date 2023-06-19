@@ -4,4 +4,5 @@ export const MESSAGE_PATTERN = {
     FIND_ONE_BY_FIELD: 'FIND_ONE_BY_FIELD',
   },
 };
+
 export const EVENTS_PATTERN = {};
