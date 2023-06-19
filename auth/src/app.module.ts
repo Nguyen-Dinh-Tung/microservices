@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
+import { LogTcpModule } from './core/modules/logs/log-tcp.module';
 
 @Module({
   imports: [
@@ -14,5 +15,6 @@ import { AuthModule } from './modules/auth/auth.module';
   ],
   controllers: [AppController],
   providers: [AppService],
+  exports: [],
 })
 export class AppModule {}

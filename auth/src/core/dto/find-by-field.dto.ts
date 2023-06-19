@@ -1,5 +1,5 @@
 export class FindOneByFieldDto {
-  useranme?: string;
+  username?: string;
   email?: string;
   phone?: string;
 }
