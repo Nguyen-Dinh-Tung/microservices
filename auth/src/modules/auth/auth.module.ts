@@ -4,7 +4,6 @@ import { AuthController } from './controller/auth.controller';
 import { AuthService } from './services/auth.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
-import { LogTcpModule } from 'src/core/modules/logs/log-tcp.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -17,7 +16,6 @@ import { LogTcpModule } from 'src/core/modules/logs/log-tcp.module';
       inject: [ConfigService],
       imports: [ConfigModule.forRoot()],
     }),
-    LogTcpModule,
   ],
   controllers: [AuthController],
   providers: [

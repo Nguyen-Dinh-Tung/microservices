@@ -2,7 +2,6 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
-import { LogPatternTcpInterceptor } from './core/modules/logs/log-tcp.interceptor.';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
